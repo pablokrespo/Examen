@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen 2</title>
+</head>
+<body>
+    <pre>Cuántos alumnos tenemos?: <input type="text" name="alumnos" id="alumnos" style="width : 40px;"> <button type="button" onclick="notas()">Notas</button> </pre>
+    <pre id="resultado"></pre>
+    <script>
+        function notas(){
+            var alumnos = document.getElementById("alumnos").value;
+
+            if ((alumnos > 1) && (alumnos <= 30)){
+                for (let i = 1; i <= alumnos; i++){
+                    resultado.innerHTML += 
+                    '<pre>Nota del alumno ' + i + ': <input type="text" name="nota' + i + '" id="nota' + i + '" style="width : 40px;"></pre>';
+                }
+                           
+                resultado.innerHTML += 
+                    '<button type="button" onclick="calcular()">Calcular</button>';
+            
+            } else {
+                alert("Introduce dos números validos (entre 2 y 30)");
+            }
+
+        }
+
+        function calcular(alumnos){
+            var fecha = new Date();
+            var total = [];
+            var suma = 0;
+            var media = (suma / alumnos).toFixed(2);
+            var minutos;
+
+            for (let i = 1; i <= alumnos; i++){
+                total.push(("nota" + i).value);
+
+                for (let i = 0; i < total.length; i++) {
+                    if ((total[i] <= 10) && (total[i] == null)){
+                        suma += total[i].value;
+
+                        if (fecha.getMinutes() <= 9){
+                            minutos = "0" + fecha.getMinutes();
+                        } else {
+                            minutos = fecha.getMinutes();
+                        }
+
+                        resultado.innerHTML += 
+                            '<pre>' + fecha.getFullYear() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getDate() + ' ' + fecha.getHours() + ':' + minutos + ' - La media de los ' + alumnos + ' alumnos es de: ' + media + '</pre>';
+
+                    } else {
+                        alert("Introduce un número válido (entre 1 y 10 en: alumno " + (i + 1));
+                    }
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>

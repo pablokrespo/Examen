@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen 1</title>
+</head>
+<body>
+    <input type="text" name="numerox" id="numerox" style="width : 50px;" placeholder="X: ">
+    <input type="text" name="numeroy" id="numeroy" style="width : 50px;" placeholder="Y: ">
+    <button type="button" onclick="imprimir()">Imprimir</button>
+    <br>
+    <pre id="resultado"></pre>
+    <script>
+        var inicioCronometro = new Date();
+        function imprimir(){
+            var numerox = document.getElementById("numerox").value;
+            var numeroy = document.getElementById("numeroy").value;
+            if (((numerox) && (numeroy)) < 200){
+                if (numerox <= numeroy){
+                    resultado.innerHTML += '<hr color="red">';
+                    resultado.innerHTML += '<hr color="red">';
+                    for (let i = numerox; i <= numeroy; i++) {
+                        resultado.innerHTML += '<pre>' + i + '</pre>';
+
+                        if (i % 3 == 0) {
+                            resultado.innerHTML += '<pre>|=> Es múltiplo de 3</pre>';
+                        }
+
+                        if (i % 5 == 0) {
+                            resultado.innerHTML += '<hr>';
+                        }
+                    }
+                } else {
+                    alert(numeroy + " // debe ser MAYOR o IGUAL que // " + numerox);
+                }
+            } else {
+                alert("Introduce dos números validos (entre 1 y 200)");
+            }
+            var finalCronometro = new Date();
+            
+            resultado.innerHTML += '<pre>Desde que se introdujeron los números ' + numerox + ' y ' + numeroy + ' hemos tardado: ' + Math.round((finalCronometro.getTime() - inicioCronometro.getTime()) / 1000) + ' segundos';
+        }
+    
+    </script>
+</body>
+</html>
