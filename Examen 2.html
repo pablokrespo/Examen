@@ -11,10 +11,10 @@
     <pre id="resultado"></pre>
     <script>
         function notas(){
-            var alumnos = document.getElementById("alumnos").value;
+            var alumnos = document.getElementById("alumnos").value; //alumnos debería ser una variable global, para poder cogerla desde cualquier lado
 
             if ((alumnos > 1) && (alumnos <= 30)){
-                for (let i = 1; i <= alumnos; i++){
+                for (let i = 1; i <= alumnos; i++){ //no empezando en 0!
                     resultado.innerHTML += 
                     '<pre>Nota del alumno ' + i + ': <input type="text" name="nota' + i + '" id="nota' + i + '" style="width : 40px;"></pre>';
                 }
@@ -28,15 +28,16 @@
 
         }
 
-        function calcular(alumnos){
+        function calcular(alumnos){ //cuando llamas a calcular no le pasas el número de alumnos
+            debugger;
             var fecha = new Date();
             var total = [];
             var suma = 0;
-            var media = (suma / alumnos).toFixed(2);
+            var media = (suma / alumnos).toFixed(2); //siempre va a ser 0, hay que calcularla al final
             var minutos;
 
             for (let i = 1; i <= alumnos; i++){
-                total.push(("nota" + i).value);
+                total.push(document.getElementById("nota" + i).value); //hay que coger el valor del input
 
                 for (let i = 0; i < total.length; i++) {
                     if ((total[i] <= 10) && (total[i] == null)){
@@ -50,6 +51,7 @@
 
                         resultado.innerHTML += 
                             '<pre>' + fecha.getFullYear() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getDate() + ' ' + fecha.getHours() + ':' + minutos + ' - La media de los ' + alumnos + ' alumnos es de: ' + media + '</pre>';
+                        //escribimos el resultado dentro del bucle?
 
                     } else {
                         alert("Introduce un número válido (entre 1 y 10 en: alumno " + (i + 1));
