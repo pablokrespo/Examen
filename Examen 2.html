@@ -10,11 +10,12 @@
     <pre>Cuántos alumnos tenemos?: <input type="text" name="alumnos" id="alumnos" style="width : 40px;"> <button type="button" onclick="notas()">Notas</button> </pre>
     <pre id="resultado"></pre>
     <script>
+        var alumnos = 0;
         function notas(){
-            var alumnos = document.getElementById("alumnos").value; //alumnos debería ser una variable global, para poder cogerla desde cualquier lado
+            alumnos = document.getElementById("alumnos").value;
 
             if ((alumnos > 1) && (alumnos <= 30)){
-                for (let i = 1; i <= alumnos; i++){ //no empezando en 0!
+                for (let i = 1; i <= alumnos; i++){
                     resultado.innerHTML += 
                     '<pre>Nota del alumno ' + i + ': <input type="text" name="nota' + i + '" id="nota' + i + '" style="width : 40px;"></pre>';
                 }
@@ -28,36 +29,37 @@
 
         }
 
-        function calcular(alumnos){ //cuando llamas a calcular no le pasas el número de alumnos
-            debugger;
+        function calcular(){
             var fecha = new Date();
             var total = [];
             var suma = 0;
-            var media = (suma / alumnos).toFixed(2); //siempre va a ser 0, hay que calcularla al final
             var minutos;
-
+            console.log(suma);
             for (let i = 1; i <= alumnos; i++){
-                total.push(document.getElementById("nota" + i).value); //hay que coger el valor del input
+                total.push(document.getElementById("nota" + i).value);
 
                 for (let i = 0; i < total.length; i++) {
-                    if ((total[i] <= 10) && (total[i] == null)){
+                    console.log(suma);
+                    if ((total[i] <= 10) || (total[i] == null)){
                         suma += total[i].value;
-
+                        console.log(suma);
                         if (fecha.getMinutes() <= 9){
                             minutos = "0" + fecha.getMinutes();
                         } else {
                             minutos = fecha.getMinutes();
                         }
 
-                        resultado.innerHTML += 
-                            '<pre>' + fecha.getFullYear() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getDate() + ' ' + fecha.getHours() + ':' + minutos + ' - La media de los ' + alumnos + ' alumnos es de: ' + media + '</pre>';
-                        //escribimos el resultado dentro del bucle?
-
                     } else {
-                        alert("Introduce un número válido (entre 1 y 10 en: alumno " + (i + 1));
+                        alert("Introduce un número válido (entre 1 y 10) en: alumno " + (i + 1));
                     }
                 }
             }
+            console.log(suma);
+            var media = (suma / alumnos).toFixed(2);
+
+            resultado.innerHTML += 
+                '<pre>' + fecha.getFullYear() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getDate() + ' ' + fecha.getHours() + ':' + minutos + ' - La media de los ' + alumnos + ' alumnos es de: ' + media + '</pre>';
+
         }
 
     </script>
